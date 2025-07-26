@@ -1,22 +1,17 @@
-EXECUTABLE=guard
-
-PROJECT_FILE=main.cpp
-
 # Compiler Options
+CC = gcc
 CXX = g++
 CXXFLAGS = -std=c++17 -Wconversion -Wall -Werror -Wextra -pedantic
 
-%.o: %.cpp
-	$(CXX) $(CXXFLAGS) -c $*.cpp
+.PHONY: setup
+setup:
+	CC=$(CC) CXX=$(CXX) cmake -S . -B build
 
-SOURCES     = $(wildcard *.cpp)
-OBJECTS     = $(SOURCES:%.cpp=%.o)
-
-$(EXECUTABLE): $(OBJECTS)
-	$(CXX) $(CXXFLAGS) $(OBJECTS) -o $(EXECUTABLE)
+.PHONY: build
+build: setup
+	cmake --build build
 
 .PHONY: clean
 clean:
-	rm $(EXECUTABLE) $(OBJECTS)
+	rm -rf build
 
-all: $(EXECUTABLE)
