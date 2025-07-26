@@ -1,5 +1,2 @@
-*.o
-*.exe
-makefile.template
-
-guard
+build
+.vscode

@@ -1,10 +1,10 @@
 #include <iostream>
-#include <sim.hpp>
+#include <traffic_engine.hpp>
 
 int main ()
 {
 	std::cout << "Crossing Guard!" << std::endl;
 
-	TrafficSimulation::Engine engine;
+	TrafficEngine engine;
 	engine.loop();
 }
