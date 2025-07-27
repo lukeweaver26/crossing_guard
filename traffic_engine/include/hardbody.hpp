@@ -8,6 +8,8 @@ public:
   Vector2 position;
   Vector2 velocity;
   Vector2 acceleration;
+  
+  Vector2 direction;
 
   void step();
   void print();

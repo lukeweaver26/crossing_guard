@@ -14,6 +14,8 @@ void Hardbody::step() {
   double dt = SimulationClock::get().get_timestep();
   velocity += acceleration * dt;
   position += velocity * dt;
+
+  direction = velocity;
 }
 
 void Hardbody::print() {

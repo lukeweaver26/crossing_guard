@@ -7,7 +7,7 @@
 class SimulationClock {
 public:
   static SimulationClock &get() {
-    static SimulationClock instance(0.05);
+    static SimulationClock instance(0.01);
     return instance;
   }
 

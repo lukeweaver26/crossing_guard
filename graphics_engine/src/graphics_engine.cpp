@@ -3,15 +3,7 @@
 #include <stdio.h>
 #include <traffic_state.hpp>
 #include <vector2.hpp>
-
-ImVec2 GraphicsEngine::translate_coords(const Vector2 &traffic_plane) {
-  ImVec2 graphics_coords;
-  graphics_coords.x =
-      static_cast<float>(traffic_plane.x + 1) * (static_cast<float>(width) / 2);
-  graphics_coords.y = static_cast<float>(traffic_plane.y + 1) *
-                      (static_cast<float>(height) / 2);
-  return graphics_coords;
-}
+#include <object_drawer.hpp>
 
 int GraphicsEngine::initialize() {
   // Init GLFW
@@ -46,24 +38,10 @@ int GraphicsEngine::step(const TrafficState &state) {
   // Get Object
   Object car = state.objects[0];
 
-  // UI
-  ImDrawList *bg = ImGui::GetBackgroundDrawList();
+  drawer.draw(car);
 
-  ImVec2 pos = translate_coords(car.position);
-  ImVec2 size(60, 30);
-  bg->AddRectFilled(pos, ImVec2(pos.x + size.x, pos.y + size.y),
-                    IM_COL32(255, 0, 0, 255));
-
-  // Render
-  ImGui::Render();
-  int display_w, display_h;
-  glfwGetFramebufferSize(window, &display_w, &display_h);
-  glViewport(0, 0, display_w, display_h);
-  glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-  glClear(GL_COLOR_BUFFER_BIT);
-  ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
-
-  glfwSwapBuffers(window);
+  render();
+  
   return 0;
 }
 
@@ -74,4 +52,16 @@ int GraphicsEngine::shutdown() {
   glfwDestroyWindow(window);
   glfwTerminate();
   return 0;
+}
+
+void GraphicsEngine::render() {
+  ImGui::Render();
+  int display_w, display_h;
+  glfwGetFramebufferSize(window, &display_w, &display_h);
+  glViewport(0, 0, display_w, display_h);
+  glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+  glClear(GL_COLOR_BUFFER_BIT);
+  ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+
+  glfwSwapBuffers(window);
 }
