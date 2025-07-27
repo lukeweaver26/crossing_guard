@@ -6,10 +6,10 @@
 #include <graphics_engine.hpp>
 
 
-int GraphicsEngine::start () {
+int GraphicsEngine::initialize () {
     // Init GLFW
     if (!glfwInit()) return -1;
-    GLFWwindow* window = glfwCreateWindow(1280, 720, "ImGui + GLFW", NULL, NULL);
+    window = glfwCreateWindow(1280, 720, "Crossing Guard", NULL, NULL);
     glfwMakeContextCurrent(window);
     glfwSwapInterval(1); // Enable vsync
 
@@ -21,33 +21,41 @@ int GraphicsEngine::start () {
     ImGui::StyleColorsDark();
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 130");
+    
+    return 0;
+}
 
-    // Main loop
-    while (!glfwWindowShouldClose(window)) {
-        glfwPollEvents();
+int GraphicsEngine::running() {
+    return !glfwWindowShouldClose(window);
+}
 
-        ImGui_ImplOpenGL3_NewFrame();
-        ImGui_ImplGlfw_NewFrame();
-        ImGui::NewFrame();
+int GraphicsEngine::step(const TrafficState& state) {
+    glfwPollEvents();
 
-        // UI
-        ImGui::Begin("Hello, world!");
-        ImGui::Text("This is a simple GLFW+OpenGL3+ImGui example.");
-        ImGui::End();
+    ImGui_ImplOpenGL3_NewFrame();
+    ImGui_ImplGlfw_NewFrame();
+    ImGui::NewFrame();
 
-        // Render
-        ImGui::Render();
-        int display_w, display_h;
-        glfwGetFramebufferSize(window, &display_w, &display_h);
-        glViewport(0, 0, display_w, display_h);
-        glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
-        glClear(GL_COLOR_BUFFER_BIT);
-        ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
+    // UI
+    ImGui::Begin("Hello, world!");
+    ImGui::Text("This is a simple GLFW+OpenGL3+ImGui example.");
+    ImGui::End();
 
-        glfwSwapBuffers(window);
-    }
+    // Render
+    ImGui::Render();
+    int display_w, display_h;
+    glfwGetFramebufferSize(window, &display_w, &display_h);
+    glViewport(0, 0, display_w, display_h);
+    glClearColor(0.1f, 0.1f, 0.1f, 1.0f);
+    glClear(GL_COLOR_BUFFER_BIT);
+    ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-    // Cleanup
+    glfwSwapBuffers(window);
+    return 0;
+}
+
+int GraphicsEngine::shutdown()
+{
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();

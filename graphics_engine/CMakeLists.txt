@@ -3,4 +3,4 @@ add_library(graphics-engine STATIC
 )
 
 target_include_directories(graphics-engine PUBLIC interface)
-target_link_libraries(graphics-engine PRIVATE imgui)
+target_link_libraries(graphics-engine PRIVATE imgui common)
