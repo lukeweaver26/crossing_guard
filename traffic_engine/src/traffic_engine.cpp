@@ -10,14 +10,16 @@
 TrafficEngine::TrafficEngine() : hardbodies() {}
 
 void TrafficEngine::initialize() {
-  Hardbody car({-1.0, 0.0}, {.1, 0}, {0, -.01});
+  Hardbody car({-1.0, 0.0}, {.1, 0}, {0, -.1});
   hardbodies.push_back(car);
 }
 
 TrafficState TrafficEngine::step() {
 
   TrafficState state;
-  for (int i = 0; i < hardbodies.size(); i++) {
+
+  int hardbodies_size = static_cast<int>(hardbodies.size());
+  for (int i = 0; i < hardbodies_size; i++) {
     hardbodies[i].step();
     state.objects.push_back(hardbodies[i].position);
   }
