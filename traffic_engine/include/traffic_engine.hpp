@@ -1,19 +1,19 @@
 #ifndef TRAFFIC_ENGINE_HPP
 #define TRAFFIC_ENGINE_HPP
 
-#include <vector>
 #include <hardbody.hpp>
 #include <traffic_state.hpp>
+#include <vector>
 
 class TrafficEngine {
-    public:
-        TrafficState step();
-        void initialize();
+public:
+  TrafficState step();
+  void initialize();
 
-        TrafficEngine();
+  TrafficEngine();
 
-    private:
-        std::vector<Hardbody> hardbodies;
+private:
+  std::vector<Hardbody> hardbodies;
 };
 
 #endif
