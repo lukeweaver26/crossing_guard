@@ -11,6 +11,7 @@ set(GLFW_BUILD_WAYLAND OFF CACHE BOOL "Don't use Wayland" FORCE)
 add_subdirectory(dependencies/glfw)
 
 add_subdirectory(traffic_engine)
+add_subdirectory(graphics_engine)
 add_subdirectory(dependencies)
 
 
@@ -20,6 +21,7 @@ find_package(OpenGL REQUIRED)
 
 target_link_libraries(crossing-guard PUBLIC 
 	traffic-engine
+	graphics-engine
 	imgui
 	glfw
 	OpenGL::GL
