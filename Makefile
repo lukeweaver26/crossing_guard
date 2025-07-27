@@ -1,14 +1,19 @@
 # Compiler Options
 CC = gcc
 CXX = g++
-CXXFLAGS = -std=c++17 -Wconversion -Wall -Werror -Wextra -pedantic
 
-.PHONY: setup
-setup:
+# Directories
+BUILD_DIR := build
+CONFIGURE_STAMP := $(BUILD_DIR)/configure.stamp
+
+.PHONY: configure
+configure: $(CONFIGURE_STAMP)
+$(CONFIGURE_STAMP): CMakeLists.txt
 	CC=$(CC) CXX=$(CXX) cmake -S . -B build
+	@touch $(BUILD_DIR)/configure.stamp
 
 .PHONY: build
-build: setup
+build: configure
 	cmake --build build
 
 .PHONY: clean
