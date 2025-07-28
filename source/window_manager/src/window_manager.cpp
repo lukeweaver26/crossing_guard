@@ -33,7 +33,7 @@ bool WindowManager::running() {
     return !glfwWindowShouldClose(window);
 }
 
-WindowManager::~WindowManager() {
+void WindowManager::shutdown() {
     glfwDestroyWindow(window);
     glfwTerminate();
 }

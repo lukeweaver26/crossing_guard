@@ -8,14 +8,15 @@ class WindowManager {
         static WindowManager& getInstance();
 
         void initialize(int width, int height, const char* title);
-
+        void shutdown();
+        
         GLFWwindow* getWindow() const;
 
         void pollEvents();
         void swapBuffers();
         bool running();
 
-        ~WindowManager();
+        
 
         WindowManager(const WindowManager&) = delete;
         void operator=(const WindowManager&) = delete;

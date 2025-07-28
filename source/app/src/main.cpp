@@ -22,8 +22,6 @@ int main() {
   
   TrafficState traffic_state;
   InputState input_state;
-  (void) input_state;
-  (void) input_manager;
 
   SimulationClock &clock = SimulationClock::get();
 
@@ -34,4 +32,5 @@ int main() {
   }
 
   graphics_engine.shutdown();
+  window_manager.shutdown();
 }
