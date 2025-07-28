@@ -26,8 +26,6 @@ int GraphicsEngine::initialize() {
   return 0;
 }
 
-int GraphicsEngine::running() { return !glfwWindowShouldClose(window); }
-
 int GraphicsEngine::step(const TrafficState &state) {
   glfwPollEvents();
 
@@ -35,11 +33,11 @@ int GraphicsEngine::step(const TrafficState &state) {
   ImGui_ImplGlfw_NewFrame();
   ImGui::NewFrame();
 
-  // Get Object
-  Object car = state.objects[0];
-
-  drawer.draw(car);
-
+  for (size_t i = 0; i < state.objects.size(); i++)
+  {
+    drawer.draw(state.objects[i]);
+  }
+  
   render();
   
   return 0;
@@ -53,6 +51,8 @@ int GraphicsEngine::shutdown() {
   glfwTerminate();
   return 0;
 }
+
+int GraphicsEngine::running() { return !glfwWindowShouldClose(window); }
 
 void GraphicsEngine::render() {
   ImGui::Render();

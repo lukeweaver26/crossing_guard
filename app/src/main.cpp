@@ -7,7 +7,7 @@
 int main() {
   std::cout << "Crossing Guard!" << std::endl;
 
-  GraphicsEngine graphics(1280, 720);
+  GraphicsEngine graphics(720, 720);
   TrafficEngine engine;
   TrafficState state;
 

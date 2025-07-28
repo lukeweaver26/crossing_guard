@@ -16,7 +16,7 @@ public:
   int step(const TrafficState &state);
   int shutdown();
 
-  GraphicsEngine(int width = 1280, int height = 720)
+  GraphicsEngine(int width = 720, int height = 720)
       : width(width), height(height), drawer(width, height){};
 
 private:

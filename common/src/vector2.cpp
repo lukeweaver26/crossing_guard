@@ -35,3 +35,8 @@ Vector2 &Vector2::operator*=(double scalar) {
 }
 
 double Vector2::magnitude() const { return std::sqrt(x * x + y * y); }
+
+Vector2 Vector2::normal() const {
+  double length = sqrtf(x * x + y * y);
+  return Vector2(x / length, y / length);
+}

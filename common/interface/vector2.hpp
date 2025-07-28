@@ -23,6 +23,7 @@ public:
   Vector2 &operator*=(double scalar);
 
   double magnitude() const;
+  Vector2 normal() const;
 };
 
 #endif

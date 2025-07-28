@@ -11,11 +11,20 @@ Hardbody::Hardbody(std::pair<double, double> pos, std::pair<double, double> vel,
       acceleration(acl.first, acl.second) {}
 
 void Hardbody::step() {
+  if (position.x >= 1 || position.x <= -1)
+  {
+    velocity.x *= -1;
+  }
+
+  if (position.y >= 1 || position.y <= -1)
+  {
+    velocity.y *= -1;
+  }
   double dt = SimulationClock::get().get_timestep();
   velocity += acceleration * dt;
   position += velocity * dt;
 
-  direction = velocity;
+  direction = velocity.normal();
 }
 
 void Hardbody::print() {
