@@ -12,18 +12,11 @@
 class GraphicsEngine {
 public:
   int initialize();
-  int running();
   int step(const TrafficState &state);
   int shutdown();
 
-  GraphicsEngine(int width = 720, int height = 720)
-      : width(width), height(height), drawer(width, height){};
-
 private:
-  int width;
-  int height;
-
-  GLFWwindow *window = nullptr;
+  GLFWwindow *window;
   ObjectDrawer drawer;
 
   void render();

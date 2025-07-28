@@ -4,30 +4,25 @@
 #include <traffic_state.hpp>
 #include <vector2.hpp>
 #include <object_drawer.hpp>
+#include <window_manager.hpp>
 
 int GraphicsEngine::initialize() {
-  // Init GLFW
-  if (!glfwInit())
-    return -1;
-  window = glfwCreateWindow(width, height, "Crossing Guard", NULL, NULL);
-  glfwMakeContextCurrent(window);
-  glfwSwapInterval(1); // Enable vsync
+  GLFWwindow* window = WindowManager::getInstance().getWindow();
 
-  // Setup ImGui
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
-  ImGuiIO &io = ImGui::GetIO();
-  (void)io;
+  ImGuiIO& io = ImGui::GetIO(); (void)io;
 
   ImGui::StyleColorsDark();
   ImGui_ImplGlfw_InitForOpenGL(window, true);
   ImGui_ImplOpenGL3_Init("#version 130");
 
+  this->window = window;
   return 0;
 }
 
 int GraphicsEngine::step(const TrafficState &state) {
-  glfwPollEvents();
+  WindowManager::getInstance().pollEvents();
 
   ImGui_ImplOpenGL3_NewFrame();
   ImGui_ImplGlfw_NewFrame();
@@ -47,12 +42,8 @@ int GraphicsEngine::shutdown() {
   ImGui_ImplOpenGL3_Shutdown();
   ImGui_ImplGlfw_Shutdown();
   ImGui::DestroyContext();
-  glfwDestroyWindow(window);
-  glfwTerminate();
   return 0;
 }
-
-int GraphicsEngine::running() { return !glfwWindowShouldClose(window); }
 
 void GraphicsEngine::render() {
   ImGui::Render();

@@ -1,0 +1,6 @@
+add_subdirectory(app)
+add_subdirectory(common)
+add_subdirectory(traffic_engine)
+add_subdirectory(graphics_engine)
+add_subdirectory(input_manager)
+add_subdirectory(window_manager)

@@ -1,8 +1,8 @@
 #include <object_drawer.hpp>
 #include "imgui.h"
+#include <GLFW/glfw3.h>
 
 void ObjectDrawer::draw(const Object &obj) {
-   
   ImDrawList *draw_list = ImGui::GetBackgroundDrawList();
 
   ImVec2 center = translate_coords(obj.position);
@@ -32,11 +32,14 @@ void ObjectDrawer::draw(const Object &obj) {
 }
 
 ImVec2 ObjectDrawer::translate_coords(const Vector2 &traffic_plane) {
-  float x = static_cast<float>(traffic_plane.x + 1) * 
-                      (static_cast<float>(window_width) / 2);
+  int window_width, window_height;
+  glfwGetWindowSize(window, &window_width, &window_height);
 
-  float y = static_cast<float>(traffic_plane.y + 1) *
-                      (static_cast<float>(window_height) / 2);
+  float x = static_cast<float>(window_width) - (static_cast<float>(traffic_plane.x + 1) * 
+                      (static_cast<float>(window_width) / 2));
+
+  float y = static_cast<float>(window_height) - (static_cast<float>(traffic_plane.y + 1) *
+                      (static_cast<float>(window_height) / 2));
 
   return ImVec2(x, y);
 }

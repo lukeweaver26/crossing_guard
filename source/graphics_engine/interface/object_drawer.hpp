@@ -3,16 +3,16 @@
 
 #include <traffic_state.hpp>
 #include "imgui.h"
+#include <window_manager.hpp>
 
 class ObjectDrawer {
     public:
         void draw(const Object &obj);
 
-        ObjectDrawer(int width, int height) : window_width(width), window_height(height) {};
-
+        ObjectDrawer() : window(WindowManager::getInstance().getWindow()){};
+        
     private:
-        int window_width;
-        int window_height;
+        GLFWwindow* window;
 
         ImVec2 translate_coords(const Vector2 &coords);
 };

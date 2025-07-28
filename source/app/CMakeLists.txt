@@ -9,6 +9,8 @@ target_include_directories(crossing-guard PUBLIC interface)
 target_link_libraries(crossing-guard PUBLIC 
 	traffic-engine
 	graphics-engine
+	input-manager
+	window-manager
 	common
 	imgui
 	glfw

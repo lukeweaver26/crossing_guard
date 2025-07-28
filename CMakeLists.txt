@@ -12,16 +12,14 @@ set(CMAKE_CXX_EXTENSIONS OFF)
 
 include(cmake/graphics.cmake)
 
-add_subdirectory(app)
-add_subdirectory(common)
-add_subdirectory(traffic_engine)
-add_subdirectory(graphics_engine)
-
+add_subdirectory(source)
 
 set(COMPILE_WARNING_TARGETS  
 	crossing-guard
 	traffic-engine 
 	graphics-engine
+	window-manager
+	input-manager
 )
 
 set(COMPILER_OPTIONS 
