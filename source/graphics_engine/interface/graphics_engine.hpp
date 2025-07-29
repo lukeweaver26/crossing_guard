@@ -22,6 +22,8 @@ public:
 private:
   GLFWwindow *window;
   ObjectDrawer drawer;
+
+  Vector2 worldViewportSize;
   
 };
 

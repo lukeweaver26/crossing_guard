@@ -6,10 +6,6 @@
 struct InputState {
     bool spawn_vehicle;
     float sim_speed;
-
-    void print() {
-        std::cout << "Spawn Vehicle: " << spawn_vehicle << std::endl;
-    }
 };
 
 #endif

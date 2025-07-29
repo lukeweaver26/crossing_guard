@@ -2,7 +2,6 @@
 #include <iostream>
 #include <thread>
 
-#include <hardbody.hpp>
 #include <simulation_clock.hpp>
 #include <traffic_engine.hpp>
 #include <traffic_state.hpp>
@@ -42,7 +41,6 @@ void TrafficEngine::step() {
     b2Vec2 position = b2Body_GetPosition(cars[i]);
     float angle = b2Rot_GetAngle(b2Body_GetRotation(cars[i]));
     obj.position = Vector2(position.x, position.y);
-    std::cout << obj.position.x << " " << obj.position.y << std::endl;
     obj.angle = angle;
     state.objects.push_back(obj);
   }
