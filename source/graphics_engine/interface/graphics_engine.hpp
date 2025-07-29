@@ -13,14 +13,16 @@ class GraphicsEngine {
 public:
   int initialize();
   int step(const TrafficState &state);
+
+  void startFrame();
+  void endFrame();
+
   int shutdown();
 
 private:
   GLFWwindow *window;
   ObjectDrawer drawer;
-
-  void render();
- 
+  
 };
 
 #endif

@@ -6,12 +6,13 @@
 
 class InputManager {
     public:
-        void update();
+        void step();
         InputState getState() const;
+
+        bool shouldCaptureInput() const;
 
     private:
         InputState state;
-        GLFWwindow* window;
 };
 
 #endif

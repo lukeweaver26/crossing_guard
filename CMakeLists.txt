@@ -20,6 +20,7 @@ set(COMPILE_WARNING_TARGETS
 	graphics-engine
 	window-manager
 	input-manager
+	app
 )
 
 set(COMPILER_OPTIONS 

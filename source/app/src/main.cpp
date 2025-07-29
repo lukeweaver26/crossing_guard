@@ -5,10 +5,9 @@
 #include <traffic_state.hpp>
 #include <input_manager.hpp>
 #include <window_manager.hpp>
-#include <GLFW/glfw3.h>
 
 int main() {
-  std::cout << "Crossing Guard!" << std::endl;
+  std::cout << "Crossing Guard" << std::endl;
 
   WindowManager& window_manager = WindowManager::getInstance();
   window_manager.initialize(720, 720, "Crossing Guard");
@@ -19,15 +18,21 @@ int main() {
 
   traffic_engine.initialize();
   graphics_engine.initialize();
-  
-  TrafficState traffic_state;
-  InputState input_state;
 
   SimulationClock &clock = SimulationClock::get();
 
   while (window_manager.running()) {
-    traffic_state = traffic_engine.step();
-    graphics_engine.step(traffic_state);
+    graphics_engine.startFrame();
+    
+    graphics_engine.step(traffic_engine.getState());
+
+    input_manager.step();
+    traffic_engine.handleInput(input_manager.getState());
+
+    traffic_engine.step();
+    
+
+    graphics_engine.endFrame();
     clock.wait_next();
   }
 

@@ -4,16 +4,21 @@
 #include <hardbody.hpp>
 #include <traffic_state.hpp>
 #include <vector>
+#include <input_state.hpp>
 
 class TrafficEngine {
 public:
-  TrafficState step();
   void initialize();
+  void step();
+  void handleInput(const InputState& input_state);
+
+  TrafficState getState();
 
   TrafficEngine();
 
 private:
   std::vector<Hardbody> hardbodies;
+  TrafficState state;
 };
 
 #endif

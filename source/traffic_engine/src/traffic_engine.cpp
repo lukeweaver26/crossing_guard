@@ -6,6 +6,7 @@
 #include <simulation_clock.hpp>
 #include <traffic_engine.hpp>
 #include <traffic_state.hpp>
+#include <math.h>
 
 TrafficEngine::TrafficEngine() : hardbodies() {}
 
@@ -16,9 +17,9 @@ void TrafficEngine::initialize() {
   hardbodies.push_back(car2);
 }
 
-TrafficState TrafficEngine::step() {
+void TrafficEngine::step() {
 
-  TrafficState state;
+  state = TrafficState();
 
   int hardbodies_size = static_cast<int>(hardbodies.size());
   for (int i = 0; i < hardbodies_size; i++) {
@@ -29,5 +30,21 @@ TrafficState TrafficEngine::step() {
     obj.direction = hardbodies[i].direction;
     state.objects.push_back(obj);
   }
-  return state;
 }
+
+TrafficState TrafficEngine::getState() {return state;}
+
+void TrafficEngine::handleInput(const InputState& input_state) {
+  static double angle = 0;
+  
+  if (input_state.spawn_vehicle) {
+    double s = static_cast<double>(sinf(static_cast<float>(angle)));
+    double c = static_cast<double>(cosf(static_cast<float>(angle)));
+    std::pair<double, double> vel = std::pair<double, double>(1 * c - 0 * s, 1 * s + 0 * c);
+
+    hardbodies.push_back(Hardbody({0, 0}, vel, {0, 0}));
+
+    angle += M_PI / 6;
+  }
+}
+  

@@ -22,30 +22,26 @@ int GraphicsEngine::initialize() {
 }
 
 int GraphicsEngine::step(const TrafficState &state) {
-  WindowManager::getInstance().pollEvents();
-
-  ImGui_ImplOpenGL3_NewFrame();
-  ImGui_ImplGlfw_NewFrame();
-  ImGui::NewFrame();
+  
 
   for (size_t i = 0; i < state.objects.size(); i++)
   {
     drawer.draw(state.objects[i]);
   }
   
-  render();
-  
   return 0;
 }
 
-int GraphicsEngine::shutdown() {
-  ImGui_ImplOpenGL3_Shutdown();
-  ImGui_ImplGlfw_Shutdown();
-  ImGui::DestroyContext();
-  return 0;
+
+void GraphicsEngine::startFrame() {
+  WindowManager::getInstance().pollEvents();
+
+  ImGui_ImplOpenGL3_NewFrame();
+  ImGui_ImplGlfw_NewFrame();
+  ImGui::NewFrame();
 }
 
-void GraphicsEngine::render() {
+void GraphicsEngine::endFrame() {
   ImGui::Render();
   int display_w, display_h;
   glfwGetFramebufferSize(window, &display_w, &display_h);
@@ -55,4 +51,11 @@ void GraphicsEngine::render() {
   ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
   glfwSwapBuffers(window);
+}
+
+int GraphicsEngine::shutdown() {
+  ImGui_ImplOpenGL3_Shutdown();
+  ImGui_ImplGlfw_Shutdown();
+  ImGui::DestroyContext();
+  return 0;
 }
