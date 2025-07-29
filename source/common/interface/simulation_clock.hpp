@@ -7,19 +7,19 @@
 class SimulationClock {
 public:
   static SimulationClock &get() {
-    static SimulationClock instance(0.01);
+    static SimulationClock instance(1.0f / 60.0f);
     return instance;
   }
 
   void wait_next();
 
-  double get_timestep();
+  float get_timestep();
 
 private:
   std::chrono::time_point<std::chrono::steady_clock> next_tick;
-  std::chrono::duration<double> timestep;
+  std::chrono::duration<float> timestep;
 
-  SimulationClock(double timestep);
+  SimulationClock(float timestep);
 
   SimulationClock(const SimulationClock &) = delete;
   void operator=(const SimulationClock &) = delete;

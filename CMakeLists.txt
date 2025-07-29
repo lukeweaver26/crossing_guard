@@ -11,8 +11,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 include(cmake/graphics.cmake)
+add_subdirectory(dependencies/box2d)
 
 add_subdirectory(source)
+
 
 set(COMPILE_WARNING_TARGETS  
 	crossing-guard
@@ -28,7 +30,7 @@ set(COMPILER_OPTIONS
 	-Wextra
 	-Werror
 	-Wconversion
-	-pedantic
+	# -pedantic
 )
 
 foreach(target IN LISTS COMPILE_WARNING_TARGETS)

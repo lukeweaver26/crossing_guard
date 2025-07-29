@@ -7,7 +7,7 @@ void ObjectDrawer::draw(const Object &obj) {
 
   ImVec2 center = translate_coords(obj.position);
   ImVec2 half_size(15, 7);
-  float angle_rad = -atan2f(float(obj.direction.x), float(obj.direction.y)) + float(M_PI) / 2;
+  float angle_rad = obj.angle;
 
   auto rotate = [](ImVec2 pt, float angle) -> ImVec2 {
     float s = sinf(angle);
@@ -35,11 +35,11 @@ ImVec2 ObjectDrawer::translate_coords(const Vector2 &traffic_plane) {
   int window_width, window_height;
   glfwGetWindowSize(window, &window_width, &window_height);
 
-  float x = static_cast<float>(window_width) - (static_cast<float>(traffic_plane.x + 1) * 
-                      (static_cast<float>(window_width) / 2));
+  float half_width  = static_cast<float>(window_width) / 2;
+  float half_height = static_cast<float>(window_height) / 2;
 
-  float y = static_cast<float>(window_height) - (static_cast<float>(traffic_plane.y + 1) *
-                      (static_cast<float>(window_height) / 2));
+  float x = (static_cast<float>(traffic_plane.x) * 10 +  half_width);
+  float y = (-static_cast<float>(traffic_plane.y) * 10 +  half_height);
 
   return ImVec2(x, y);
 }

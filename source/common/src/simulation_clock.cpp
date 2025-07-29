@@ -2,10 +2,10 @@
 #include <simulation_clock.hpp>
 #include <thread>
 
-SimulationClock::SimulationClock(double timestep) {
+SimulationClock::SimulationClock(float timestep) {
   using namespace std::chrono;
 
-  this->timestep = duration<double>(timestep);
+  this->timestep = duration<float>(timestep);
   this->next_tick = steady_clock::now();
 }
 
@@ -15,4 +15,4 @@ void SimulationClock::wait_next() {
   std::this_thread::sleep_until(next_tick);
 }
 
-double SimulationClock::get_timestep() { return timestep.count(); }
+float SimulationClock::get_timestep() { return timestep.count(); }

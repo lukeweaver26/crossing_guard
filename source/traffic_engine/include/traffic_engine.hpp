@@ -1,10 +1,10 @@
 #ifndef TRAFFIC_ENGINE_HPP
 #define TRAFFIC_ENGINE_HPP
 
-#include <hardbody.hpp>
 #include <traffic_state.hpp>
 #include <vector>
 #include <input_state.hpp>
+#include <box2d/box2d.h>
 
 class TrafficEngine {
 public:
@@ -17,8 +17,11 @@ public:
   TrafficEngine();
 
 private:
-  std::vector<Hardbody> hardbodies;
+  std::vector<b2BodyId> cars;
   TrafficState state;
+
+  // Box2d
+  b2WorldId worldId;
 };
 
 #endif
