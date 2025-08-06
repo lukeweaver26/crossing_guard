@@ -14,7 +14,7 @@ class ObjectDrawer {
     private:
         GLFWwindow* window;
 
-        ImVec2 translate_coords(const Vector2 &coords);
+        ImVec2 translate_coords(const Vector2 &traffic_coords, const Vector2 &world_viewport);
 };
 
 #endif

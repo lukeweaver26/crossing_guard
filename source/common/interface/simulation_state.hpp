@@ -3,8 +3,8 @@
 
 #include<vector2.hpp>
 
-class SimulationState {
-
-}
+struct SimulationState {
+    Vector2 worldViewportSize;
+};
 
 #endif

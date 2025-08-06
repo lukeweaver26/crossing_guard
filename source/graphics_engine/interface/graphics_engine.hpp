@@ -8,11 +8,12 @@
 #include <traffic_state.hpp>
 #include <vector2.hpp>
 #include <object_drawer.hpp>
+#include <simulation_state.hpp>
 
 class GraphicsEngine {
 public:
   int initialize();
-  int step(const TrafficState &state);
+  int step(const SimulationState& sim_state, const TrafficState &state);
 
   void startFrame();
   void endFrame();
@@ -21,9 +22,11 @@ public:
 
 private:
   GLFWwindow *window;
-  ObjectDrawer drawer;
-
   Vector2 worldViewportSize;
+
+  ImVec2 translateCoordinatesToWindow(const ImVec2 &traffic_coordinates);
+  ImVec2 scaleToWindow(const Vector2 &size_m);
+  void draw(const Object &obj);
   
 };
 

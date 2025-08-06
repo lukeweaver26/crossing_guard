@@ -5,6 +5,7 @@
 #include <vector2.hpp>
 #include <object_drawer.hpp>
 #include <window_manager.hpp>
+#include <simulation_state.hpp>
 
 int GraphicsEngine::initialize() {
   GLFWwindow* window = WindowManager::getInstance().getWindow();
@@ -21,12 +22,13 @@ int GraphicsEngine::initialize() {
   return 0;
 }
 
-int GraphicsEngine::step(const TrafficState &state) {
+int GraphicsEngine::step(const SimulationState &sim_state, const TrafficState &traffic_state) {
   
+  worldViewportSize = sim_state.worldViewportSize;
 
-  for (size_t i = 0; i < state.objects.size(); i++)
+  for (size_t i = 0; i < traffic_state.objects.size(); i++)
   {
-    drawer.draw(state.objects[i]);
+    draw(traffic_state.objects[i]);
   }
   
   return 0;
@@ -58,4 +60,56 @@ int GraphicsEngine::shutdown() {
   ImGui_ImplGlfw_Shutdown();
   ImGui::DestroyContext();
   return 0;
+}
+
+void GraphicsEngine::draw(const Object &obj) {
+  ImDrawList *draw_list = ImGui::GetBackgroundDrawList();
+
+  ImVec2 center = translateCoordinatesToWindow(scaleToWindow(obj.position_m));
+  ImVec2 half_size = scaleToWindow(obj.size_m);
+  float angle_rad = obj.angle_rad;
+
+  auto rotate = [](ImVec2 pt, float angle) -> ImVec2 {
+    float s = sinf(angle);
+    float c = cosf(angle);
+    return ImVec2(pt.x * c - pt.y * s, pt.x * s + pt.y * c);
+  };
+
+  ImVec2 corners[4] = {
+    {-half_size.x, -half_size.y},
+    {+half_size.x, -half_size.y},
+    {+half_size.x, +half_size.y},
+    {-half_size.x, +half_size.y}
+  };
+
+  for (int i = 0; i < 4; i++) {
+    corners[i] = rotate(corners[i], angle_rad);
+    corners[i].x += center.x;
+    corners[i].y += center.y;
+  }
+
+  draw_list->AddConvexPolyFilled(corners, 4, IM_COL32(255,0,0,255));
+}
+
+ImVec2 GraphicsEngine::translateCoordinatesToWindow(const ImVec2 &traffic_coordinates) {
+  int window_width, window_height;
+  glfwGetWindowSize(window, &window_width, &window_height);
+
+  float half_width  = static_cast<float>(window_width) / 2;
+  float half_height = static_cast<float>(window_height) / 2;
+
+  float x = traffic_coordinates.x +  half_width;
+  float y = -traffic_coordinates.y +  half_height;
+
+  return ImVec2(x, y);
+}
+
+ImVec2 GraphicsEngine::scaleToWindow(const Vector2 &size_m) {
+  int window_width, window_height;
+  glfwGetWindowSize(window, &window_width, &window_height);
+
+  float x = size_m.x * (static_cast<float>(window_width) / worldViewportSize.x);
+  float y = size_m.y * (static_cast<float>(window_height) / worldViewportSize.y);
+
+  return ImVec2(x, y);
 }

@@ -40,8 +40,8 @@ void TrafficEngine::step() {
 
     b2Vec2 position = b2Body_GetPosition(cars[i]);
     float angle = b2Rot_GetAngle(b2Body_GetRotation(cars[i]));
-    obj.position = Vector2(position.x, position.y);
-    obj.angle = angle;
+    obj.position_m = Vector2(position.x, position.y);
+    obj.angle_rad = angle;
     state.objects.push_back(obj);
   }
 }
@@ -49,7 +49,7 @@ void TrafficEngine::step() {
 TrafficState TrafficEngine::getState() {return state;}
 
 void TrafficEngine::handleInput(const InputState& input_state) {
-  if (input_state.spawn_vehicle) {
+  if (input_state.spawnVehicle) {
     std::cout << "Spawn Vehicle" << std::endl;;
   }
 }

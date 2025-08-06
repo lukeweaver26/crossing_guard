@@ -5,14 +5,16 @@
 
 
 void InputManager::step() {
-    static int i = 0;
-    state = InputState();
-    i++;
+
+    if (state.spawnVehicle == true) {
+        state.spawnVehicle = false;
+    };
+
     if (ImGui::Begin("Controls")) {
         if (ImGui::Button("Spawn Vehicle")) {
-            state.spawn_vehicle = true;
+            state.spawnVehicle = true;
         }
-        ImGui::SliderFloat("Sim Speed", &state.sim_speed, 0.1f, 5.0f);
+        ImGui::SliderFloat("Viewport Size", &state.worldViewportSize, 1.0f, 100.0f);
     }
     ImGui::End();
 }
