@@ -18,7 +18,8 @@ build: configure
 
 .PHONY: clean
 clean:
-	rm -rf build
+	rm -rf build \
+		   imgui.ini
 
 FORMAT_EXCLUDES := ./dependencies/
 FORMAT_FILES := $(shell find . -name '*.cpp' -o -name '*.hpp' | grep -v $(FORMAT_EXCLUDES))
