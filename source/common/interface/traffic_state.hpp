@@ -4,16 +4,17 @@
 #include <vector2.hpp>
 #include <vector>
 
-struct Object {
+struct Renderable {
   Vector2 position_m;
-  Vector2 size_m;
+  Vector2 halfSize_m;
   float angle_rad;
 
-  Object(Vector2 position = {0.0f, 0.0f}, Vector2 size = {2.5f, 1.0f}) : position_m(position), size_m(size), angle_rad(.5f * static_cast<float>(M_PI)){};
+  Renderable(Vector2 position = {0.0f, 0.0f}, Vector2 halfSize = {1.25, .5f})
+      : position_m(position), halfSize_m(halfSize), angle_rad(0){};
 };
 
 struct TrafficState {
-  std::vector<Object> objects;
+  std::vector<Renderable> renderables;
 };
 
 #endif

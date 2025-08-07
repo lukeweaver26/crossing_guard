@@ -4,10 +4,13 @@
 #include <iostream>
 
 struct InputState {
-    bool spawnVehicle;
+  bool spawnVehicle;
 
-    float simSpeed;
-    float worldViewportSize = 10;
+  bool turnClockwise;
+  bool turnCounterClockwise;
+
+  float simSpeed;
+  float worldViewportSize = 50;
 };
 
 #endif

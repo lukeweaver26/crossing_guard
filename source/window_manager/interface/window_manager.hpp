@@ -4,26 +4,24 @@
 #include <GLFW/glfw3.h>
 
 class WindowManager {
-    public:
-        static WindowManager& getInstance();
+public:
+  static WindowManager &getInstance();
 
-        void initialize(int width, int height, const char* title);
-        void shutdown();
-        
-        GLFWwindow* getWindow() const;
+  void initialize(int width, int height, const char *title);
+  void shutdown();
 
-        void pollEvents();
-        void swapBuffers();
-        bool running();
+  GLFWwindow *getWindow() const;
 
-        
+  void pollEvents();
+  void swapBuffers();
+  bool running();
 
-        WindowManager(const WindowManager&) = delete;
-        void operator=(const WindowManager&) = delete;
+  WindowManager(const WindowManager &) = delete;
+  void operator=(const WindowManager &) = delete;
 
-    private:
-        WindowManager() = default;
-        GLFWwindow* window = nullptr;
+private:
+  WindowManager() = default;
+  GLFWwindow *window = nullptr;
 };
 
 #endif
