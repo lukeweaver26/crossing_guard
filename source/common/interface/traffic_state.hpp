@@ -9,7 +9,7 @@ struct Renderable {
 	Vector2 halfSize_m;
 	float angle_rad;
 
-	Renderable(Vector2 position = {0.0f, 0.0f}, Vector2 halfSize = {1.25, .5f})
+	Renderable(Vector2 position = {0.0f, 0.0f}, Vector2 halfSize = {.5, 1.25f})
 		: position_m(position), halfSize_m(halfSize), angle_rad(0){};
 };
 

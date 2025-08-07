@@ -11,11 +11,12 @@ class VehicleInstance {
 	VehicleInstance(b2WorldId worldId, Vector2 position_m, Vector2 halfSize_m,
 					float angle_rad);
 
-	b2BodyId getId();
 	Vector2 getPositionMeters();
 	float getAngleRadians();
 
 	Renderable getRenderable();
+
+	void updateVehiclePhysics(float throttleInput, float steeringInput);
 
   private:
 	b2BodyId bodyId;

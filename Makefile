@@ -22,7 +22,7 @@ clean:
 		   imgui.ini
 
 FORMAT_EXCLUDES := ./dependencies/
-FORMAT_FILES := $(shell find . -name '*.cpp' -o -name '*.hpp' | grep -v $(FORMAT_EXCLUDES))
+FORMAT_FILES := $(shell find . -name '*.cpp' -o -name '*.hpp' | grep -v "$(FORMAT_EXCLUDES)")
 .PHONY: format
 format: 
 	@clang-format -i  $(FORMAT_FILES)

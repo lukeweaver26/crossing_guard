@@ -6,8 +6,8 @@
 struct InputState {
 	bool spawnVehicle;
 
-	bool turnClockwise;
-	bool turnCounterClockwise;
+	float steeringFactor = 0;
+	float throttle = 0;
 
 	float simSpeed;
 	float worldViewportSize = 50;

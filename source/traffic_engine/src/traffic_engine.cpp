@@ -44,8 +44,14 @@ void TrafficEngine::step() {
 TrafficState TrafficEngine::getState() { return state; }
 
 void TrafficEngine::handleInput(const InputState &input_state) {
+
 	if (input_state.spawnVehicle) {
-		VehicleInstance car(worldId, Vector2(0, 0), Vector2(1.25, .5), 0);
+		VehicleInstance car(worldId, Vector2(0, 0), Vector2(.5, 1.25), 0);
 		cars.push_back(car);
+	}
+
+	for (size_t i = 0; i < cars.size(); i++) {
+		cars[i].updateVehiclePhysics(input_state.throttle,
+									 input_state.steeringFactor);
 	}
 }

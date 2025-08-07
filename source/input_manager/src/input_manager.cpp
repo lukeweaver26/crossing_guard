@@ -8,12 +8,19 @@ void InputManager::step() {
 		state.spawnVehicle = false;
 	};
 
-	if (ImGui::Begin("Controls")) {
+	if (ImGui::Begin("Window Controls")) {
+		ImGui::SliderFloat("Viewport Size", &state.worldViewportSize, 1.0f,
+						   100.0f);
+	}
+	ImGui::End();
+
+	if (ImGui::Begin("Vehicle Controls")) {
 		if (ImGui::Button("Spawn Vehicle")) {
 			state.spawnVehicle = true;
 		}
-		ImGui::SliderFloat("Viewport Size", &state.worldViewportSize, 1.0f,
-						   100.0f);
+		ImGui::SliderFloat("Steering Factor", &state.steeringFactor, -1.0f,
+						   1.0f);
+		ImGui::SliderFloat("Throttle", &state.throttle, -1.0f, 1.0f);
 	}
 	ImGui::End();
 }
