@@ -5,14 +5,14 @@
 #include <input_state.hpp>
 
 class InputManager {
-public:
-  void step();
-  InputState getState() const;
+  public:
+	void step();
+	InputState getState() const;
 
-  bool shouldCaptureInput() const;
+	bool shouldCaptureInput() const;
 
-private:
-  InputState state;
+  private:
+	InputState state;
 };
 
 #endif

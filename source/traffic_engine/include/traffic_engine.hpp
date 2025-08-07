@@ -8,22 +8,22 @@
 #include <vehicle.hpp>
 
 class TrafficEngine {
-public:
-  void initialize();
-  void step();
-  void handleInput(const InputState &input_state);
+  public:
+	void initialize();
+	void step();
+	void handleInput(const InputState &input_state);
 
-  TrafficState getState();
+	TrafficState getState();
 
-  TrafficEngine();
+	TrafficEngine();
 
-private:
-  std::vector<VehicleInstance> cars;
-  TrafficState state;
-  Renderable ground;
+  private:
+	std::vector<VehicleInstance> cars;
+	TrafficState state;
+	Renderable ground;
 
-  // Box2d
-  b2WorldId worldId;
+	// Box2d
+	b2WorldId worldId;
 };
 
 #endif

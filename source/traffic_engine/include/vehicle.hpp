@@ -7,18 +7,18 @@
 #include <vector2.hpp>
 
 class VehicleInstance {
-public:
-  VehicleInstance(b2WorldId worldId, Vector2 position_m, Vector2 halfSize_m,
-                  float angle_rad);
+  public:
+	VehicleInstance(b2WorldId worldId, Vector2 position_m, Vector2 halfSize_m,
+					float angle_rad);
 
-  b2BodyId getId();
-  Vector2 getPositionMeters();
-  float getAngleRadians();
+	b2BodyId getId();
+	Vector2 getPositionMeters();
+	float getAngleRadians();
 
-  Renderable getRenderable();
+	Renderable getRenderable();
 
-private:
-  b2BodyId bodyId;
+  private:
+	b2BodyId bodyId;
 };
 
 #endif

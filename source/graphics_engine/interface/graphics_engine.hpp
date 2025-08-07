@@ -10,22 +10,22 @@
 #include <vector2.hpp>
 
 class GraphicsEngine {
-public:
-  int initialize();
-  int step(const SimulationState &sim_state, const TrafficState &state);
+  public:
+	int initialize();
+	int step(const SimulationState &sim_state, const TrafficState &state);
 
-  void startFrame();
-  void endFrame();
+	void startFrame();
+	void endFrame();
 
-  int shutdown();
+	int shutdown();
 
-private:
-  GLFWwindow *window;
-  Vector2 worldViewportSize;
+  private:
+	GLFWwindow *window;
+	Vector2 worldViewportSize;
 
-  ImVec2 translateCoordinatesToWindow(const ImVec2 &traffic_coordinates);
-  ImVec2 scaleToWindow(const Vector2 &size_m);
-  void draw(const Renderable &obj, ImU32 color);
+	ImVec2 translateCoordinatesToWindow(const ImVec2 &traffic_coordinates);
+	ImVec2 scaleToWindow(const Vector2 &size_m);
+	void draw(const Renderable &obj, ImU32 color);
 };
 
 #endif
